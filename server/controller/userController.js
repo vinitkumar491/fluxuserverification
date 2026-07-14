@@ -43,20 +43,20 @@ export const verifyUser = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        value: false,
+        success: false,
         message: "User not found",
       });
     }
 
     res.status(200).json({
-      value: true,
+      success: true,
       message: "User verified",
       user,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      value: false,
+      success: false,
       message: err.message,
     });
   }
