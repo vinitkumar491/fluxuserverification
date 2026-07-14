@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2ff, #dbeafe);
+}
+
+.verify-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.verify-card {
+  width: 100%;
+  max-width: 430px;
+  background: #fff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.4s ease;
+}
+
+.verify-card h2 {
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #374151;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.input-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 22px;
+  padding: 12px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-left: 5px solid #2563eb;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.user-card {
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.user-card h3 {
+  margin-bottom: 18px;
+  color: #111827;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detail:last-child {
+  border-bottom: none;
+}
+
+.detail span {
+  color: #6b7280;
+}
+
+.detail strong {
+  color: #111827;
+  text-align: right;
+  word-break: break-word;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
+  .verify-card {
+    padding: 25px;
+  }
+
+  .verify-card h2 {
+    font-size: 24px;
+  }
+
+  .detail {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
