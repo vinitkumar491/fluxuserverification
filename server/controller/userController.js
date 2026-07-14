@@ -1,6 +1,5 @@
 import User from "../model/User.js";
 
-// Create User
 export const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -13,7 +12,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-// Get All Users
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -26,7 +24,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// Verify User
 export const verifyUser = async (req, res) => {
   try {
     console.log("Received:", req.body);
