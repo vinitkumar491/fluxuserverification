@@ -24,18 +24,17 @@ export const getUsers = async (req, res) => {
   }
 };
 
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 export const verifyUser = async (req, res) => {
   try {
     console.log("Received:", req.body);
 
     const { name, email, phone } = req.body;
 
-    const users = await User.find();
-    console.log("Users in DB:", users);
-
     const user = await User.findOne({
-      name,
-      email,
+      name: { $regex: `^${escapeRegex(String(name).trim())}$`, $options: "i" },
+      email: { $regex: `^${escapeRegex(String(email).trim())}$`, $options: "i" },
       phone,
     });
 
