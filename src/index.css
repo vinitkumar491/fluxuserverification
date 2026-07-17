@@ -443,7 +443,7 @@ button:disabled {
   .verify-card,
   .badge-card {
     width: 100%;
-    max-width: 520px; /* same maximum width as form */
+    max-width: 520px;
   }
 
   .badge-card {
