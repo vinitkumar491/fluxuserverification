@@ -1,14 +1,8 @@
 import api from "../api/axios";
 
-export const verifyUser = async (
-  name: string,
-  email: string,
-  phone: number
-) => {
+export const verifyUser = async (letterNo: string) => {
   const response = await api.post("/users/verify", {
-    name,
-    email,
-    phone,
+    letterNo,
   });
 
   return response.data;

@@ -5,16 +5,13 @@ import { verifyUser } from "../services/userService";
 interface User {
   _id: string;
   name: string;
-  email: string;
-  phone: number;
+  letterNo: string;
+  program?: string;
+  issueDate?: string;
 }
 
 const Verifydetails = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-  });
+  const [letterNo, setLetterNo] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -22,11 +19,7 @@ const Verifydetails = () => {
   const [user, setUser] = useState<User | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-
+    setLetterNo(e.target.value);
     setMessage("");
     setStatus("idle");
   };
@@ -34,14 +27,8 @@ const Verifydetails = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.mobile) {
-      setMessage("Please fill all fields.");
-      setStatus("error");
-      return;
-    }
-
-    if (!/^\d{10}$/.test(form.mobile)) {
-      setMessage("Please enter a valid 10-digit mobile number.");
+    if (!letterNo.trim()) {
+      setMessage("Please enter the Letter No.");
       setStatus("error");
       return;
     }
@@ -52,11 +39,7 @@ const Verifydetails = () => {
     setUser(null);
 
     try {
-      const data = await verifyUser(
-        form.name.trim(),
-        form.email.trim(),
-        Number(form.mobile)
-      );
+      const data = await verifyUser(letterNo.trim());
 
       setMessage(data.message);
       setStatus("success");
@@ -75,68 +58,27 @@ const Verifydetails = () => {
 
   return (
     <div className="verify-page">
-      <div className={`verify-shell ${user ? "has-result" : ""}`}>
+      <div className="verify-shell">
         <div className="verify-card">
-          <span className="eyebrow">Identity Check</span>
-          <h2>User Verification</h2>
+          <span className="eyebrow">Certificate Check</span>
+          <h2>Certificate Verification</h2>
           <p className="subtitle">
-            Enter the registered name, email, and mobile number to confirm
-            this person's details.
+            Enter the Letter No. printed on the certificate to confirm its
+            authenticity.
           </p>
 
           <form onSubmit={handleSubmit} noValidate>
             <div className="input-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="letterNo">Letter No.</label>
               <input
-                id="name"
+                id="letterNo"
                 type="text"
-                name="name"
-                placeholder="Enter name"
-                value={form.name}
+                name="letterNo"
+                placeholder="e.g. FLUX/2026/0142"
+                value={letterNo}
                 onChange={handleChange}
-                autoComplete="name"
+                autoComplete="off"
               />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter email"
-                value={form.email}
-                onChange={handleChange}
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="mobile">Mobile number</label>
-              <div className="mobile-field">
-                <span className="mobile-prefix">+91</span>
-                <input
-                  id="mobile"
-                  type="tel"
-                  name="mobile"
-                  placeholder="10-digit number"
-                  value={form.mobile}
-                  inputMode="numeric"
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "");
-
-                    if (value.length <= 10) {
-                      setForm({
-                        ...form,
-                        mobile: value,
-                      });
-                    }
-
-                    setMessage("");
-                    setStatus("idle");
-                  }}
-                />
-              </div>
             </div>
 
             <button type="submit" disabled={loading}>
@@ -146,7 +88,7 @@ const Verifydetails = () => {
                   Verifying
                 </span>
               ) : (
-                "Verify user"
+                "Verify certificate"
               )}
             </button>
           </form>
@@ -209,17 +151,27 @@ const Verifydetails = () => {
 
             <dl className="badge-fields">
               <div className="badge-field">
-                <dt>Email</dt>
-                <dd>{user.email}</dd>
+                <dt>Letter No.</dt>
+                <dd>{user.letterNo}</dd>
               </div>
-              <div className="badge-field">
-                <dt>Phone</dt>
-                <dd>{user.phone}</dd>
-              </div>
-              <div className="badge-field">
-                <dt>User ID</dt>
-                <dd>{user._id}</dd>
-              </div>
+              {user.program && (
+                <div className="badge-field">
+                  <dt>Program</dt>
+                  <dd>{user.program}</dd>
+                </div>
+              )}
+              {user.issueDate && (
+                <div className="badge-field">
+                  <dt>Issued On</dt>
+                  <dd>
+                    {new Date(user.issueDate).toLocaleDateString("en-IN", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
         )}
