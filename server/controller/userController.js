@@ -32,7 +32,6 @@ export const verifyUser = async (req, res) => {
 
     const { letterNo } = req.body;
 
-<<<<<<< HEAD
     if (!letterNo || !String(letterNo).trim()) {
       return res.status(400).json({
         success: false,
@@ -46,13 +45,6 @@ export const verifyUser = async (req, res) => {
         $options: "i",
       },
     }).select("name letterNo program issueDate");
-=======
-    const user = await User.findOne({
-      name: { $regex: `^${escapeRegex(String(name).trim())}$`, $options: "i" },
-      email: { $regex: `^${escapeRegex(String(email).trim())}$`, $options: "i" },
-      phone,
-    });
->>>>>>> 74cd4ec14c903a1191f62ec756e5772a996d4a00
 
     console.log("Matched User:", user);
 
