@@ -75,7 +75,7 @@ const Verifydetails = () => {
 
   return (
     <div className="verify-page">
-      <div className="verify-shell">
+      <div className={`verify-shell ${user ? "has-result" : ""}`}>
         <div className="verify-card">
           <span className="eyebrow">Identity Check</span>
           <h2>User Verification</h2>
