@@ -431,3 +431,22 @@ button:disabled {
     align-items: center;
   }
 }
+
+@media (max-width: 760px) {
+  .verify-shell.has-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .verify-card,
+  .badge-card {
+    width: 100%;
+    max-width: 520px; /* same maximum width as form */
+  }
+
+  .badge-card {
+    margin-top: 20px;
+  }
+}

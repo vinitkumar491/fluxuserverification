@@ -197,7 +197,7 @@ const Verifydetails = () => {
             <div className="badge-stamp">Verified</div>
             <div className="badge-header">
               <span className="badge-eyebrow">Record found</span>
-              <span className="badge-id">#{user._id.slice(-6).toUpperCase()}</span>
+              {/* <span className="badge-id">#{user._id.slice(-6).toUpperCase()}</span> */}
             </div>
 
             <div className="badge-avatar" aria-hidden="true">
