@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema(
     },
     email: String,
     phone: Number,
-    program: String, // e.g. "Web Development Bootcamp" - optional, shown if present
-    issueDate: Date, // optional, shown if present
+    program: String, 
+    issueDate: Date,
   },
   { timestamps: true }
 );
